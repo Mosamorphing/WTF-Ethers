@@ -1,9 +1,5 @@
-import { ethers } from "ethers";
-
-// Connect to the Ethereum network using Alchemy's RPC endpoint
-// For instructions on setting up Alchemy API, please refer to https://github.com/AmazingAng/WTFSolidity/blob/main/Topics/Tools/TOOL04_Alchemy/readme.md
-const ALCHEMY_MAINNET_URL = 'https://eth-mainnet.g.alchemy.com/v2/oKmOQKbneVkxgHZfibs-iFhIlIAl6HDN';
-const provider = new ethers.JsonRpcProvider(ALCHEMY_MAINNET_URL);
+const { ethers } = require("ethers");
+const provider = new ethers.JsonRpcProvider(`https://mainnet.infura.io/v3/8b9750710d56460d940aeff47967c4ba`);
 
 // Contract address
 const addressUSDT = '0xdac17f958d2ee523a2206206994597c13d831ec7'
@@ -18,7 +14,7 @@ const abi = [
 const contractUSDT = new ethers.Contract(addressUSDT, abi, provider);
 
 
-(async () => {
+const main = async () => {
   try {
     // 1. Read the balance of USDT in Binance hot wallet
     console.log("\n1. Read the balance of USDT in Binance hot wallet")
@@ -47,9 +43,9 @@ const contractUSDT = new ethers.Contract(addressUSDT, abi, provider);
       console.log(
         `${res.args[0]} -> ${res.args[1]} ${ethers.formatUnits(res.args[2],6)}`
       )
-    }
-    );
+  })
   } catch (e) {
     console.log(e);
   }
-})()
+}
+main();
